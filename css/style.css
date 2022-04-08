@@ -61,6 +61,7 @@ main {
     position: relative;
     margin: 1rem;
     width: 300px;
+    cursor: pointer;
 }
 
 .movie img {

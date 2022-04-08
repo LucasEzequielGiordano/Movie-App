@@ -1,13 +1,28 @@
+/* Code order
+ * call elements from HTML
+ * events
+ * functions
+ */
 // calling the elements
-const main = document.getElementById("main");
+const h1 = document.querySelector("h1");
 const form = document.getElementById("form");
 const search = document.getElementById("search");
-const h1 = document.querySelector("h1");
+const main = document.getElementById("main");
 
 // event for reload page
 h1.addEventListener("click", () => {
     window.location.reload()
 })
+
+// event by clicking on search, filter movies
+form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const searchTerm = search.value;
+    if (searchTerm) {
+        getMovies(searchApi + searchTerm);
+        search.value = "";
+    }
+});
 
 // function async/await for get movies of the API
 async function getMovies(urlApi) {
@@ -33,21 +48,21 @@ function showMovies(movies) {
         const movieCard = document.createElement("div");
         movieCard.classList.add("movie");
         movieCard.innerHTML = `
-        <img src="${imgApi + poster_path}" alt="${title}"/>
-        <div class="movie-info">
-            <h3>${title}</h3>
-            <span class="${getClassByRating(vote_average)}">${vote_average}</span>
-        </div>
-        <div class="overview">
-            <h3 class="overviewTitle">Overview:</h3>
-            ${overview}
-        </div>
-        `;
+            <img src="${imgApi + poster_path}" alt="${title}"/>
+            <div class="movie-info">
+                <h3>${title}</h3>
+                <span class="${getClassByRating(vote_average)}">${vote_average}</span>
+            </div>
+            <div class="overview">
+                <h3 class="overviewTitle">Overview:</h3>
+                ${overview}
+            </div>
+            `;
         main.appendChild(movieCard);
     });
 }
 
-// depending on the rating, I get different colors 
+// function depending on the rating, I get different colors 
 function getClassByRating(vote) {
     if (vote >= 8) {
         return "green";
@@ -57,16 +72,6 @@ function getClassByRating(vote) {
         return "red";
     }
 }
-
-// by clicking on search, filter movies
-form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const searchTerm = search.value;
-    if (searchTerm) {
-        getMovies(searchApi + searchTerm);
-        search.value = "";
-    }
-});
 
 // initially get movies
 getMovies(urlApi)
