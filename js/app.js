@@ -1,7 +1,13 @@
-// I call the elements by id
+// calling the elements
 const main = document.getElementById("main");
 const form = document.getElementById("form");
 const search = document.getElementById("search");
+const h1 = document.querySelector("h1");
+
+// event for reload page
+h1.addEventListener("click", () => {
+    window.location.reload()
+})
 
 // function async/await for get movies of the API
 async function getMovies(urlApi) {
@@ -24,10 +30,8 @@ function showMovies(movies) {
             vote_average,
             overview
         } = movie;
-
         const movieCard = document.createElement("div");
         movieCard.classList.add("movie");
-
         movieCard.innerHTML = `
         <img src="${imgApi + poster_path}" alt="${title}"/>
         <div class="movie-info">
@@ -35,7 +39,7 @@ function showMovies(movies) {
             <span class="${getClassByRating(vote_average)}">${vote_average}</span>
         </div>
         <div class="overview">
-            <h3>Overview:</h3>
+            <h3 class="overviewTitle">Overview:</h3>
             ${overview}
         </div>
         `;
