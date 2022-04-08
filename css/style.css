@@ -44,4 +44,67 @@ header {
 main {
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+/* ==== movie//js ==== */
+.movie {
+    background-color: #373b69;
+    overflow: hidden;
+    box-shadow: 0 4px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+    position: relative;
+    margin: 1rem;
+    width: 300px;
+}
+
+.movie img {
+    width: 100%;
+}
+
+.movie-info {
+    color: #EBE5E2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 0.5rem 1rem;
+    letter-spacing: 0.5px;
+}
+
+.movie-info h3 {
+    margin: 0;
+}
+
+.movie-info span {
+    background-color: #272532;
+    border-radius: 100px;
+    font-weight: bold;
+    padding: 0.5rem 0.5rem;
+}
+
+.movie-info span.green {
+    color: #b2ff57;
+}
+
+.movie-info span.orange {
+    color: #ffa500;
+}
+
+.movie-info span.red {
+    color: rgb(189, 42, 42);
+}
+
+.overview {
+    background-color: #708ED2;
+    color: #fff;
+    padding: 0.5rem;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    transform: translateX(101%);
+    transition: transform 0.3s ease-in;
+}
+
+.movie:hover .overview {
+    transform: translatex(0);
 }

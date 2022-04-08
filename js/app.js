@@ -1,8 +1,3 @@
-// url API 'themoviedb'
-const urlApi = "https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=04c35731a5ee918f014970082a0088b1&page=1";
-const imgApi = "https://image.tmdb.org/t/p/w1280";
-const searchApi = "https://api.themoviedb.org/3/search/movie?&api_key=04c35731a5ee918f014970082a0088b1&query=";
-
 // I call the elements by id
 const main = document.getElementById("main");
 const form = document.getElementById("form");
@@ -29,7 +24,7 @@ function showMovies(movies) {
             vote_average,
             overview
         } = movie;
-        console.log(movie)
+
         const movieCard = document.createElement("div");
         movieCard.classList.add("movie");
 
@@ -37,7 +32,7 @@ function showMovies(movies) {
         <img src="${imgApi + poster_path}" alt="${title}"/>
         <div class="movie-info">
             <h3>${title}</h3>
-            <span class="${getClassByRate(vote_average)}">${vote_average}</span>
+            <span class="${getClassByRating(vote_average)}">${vote_average}</span>
         </div>
         <div class="overview">
             <h3>Overview:</h3>
@@ -48,7 +43,8 @@ function showMovies(movies) {
     });
 }
 
-function getClassByRate(vote) {
+// depending on the rating, I get different colors 
+function getClassByRating(vote) {
     if (vote >= 8) {
         return "green";
     } else if (vote >= 5) {
@@ -57,6 +53,16 @@ function getClassByRate(vote) {
         return "red";
     }
 }
+
+// by clicking on search, filter movies
+form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const searchTerm = search.value;
+    if (searchTerm) {
+        getMovies(searchApi + searchTerm);
+        search.value = "";
+    }
+});
 
 // initially get movies
 getMovies(urlApi)
